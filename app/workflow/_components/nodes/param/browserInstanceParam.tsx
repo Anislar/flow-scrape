@@ -3,7 +3,7 @@
 import { ParamProps } from "@/types/appNode";
 import React from "react";
 
-function BrowserInstanceParam({ param, value, updateNodeParam }: ParamProps) {
+function BrowserInstanceParam({ param }: ParamProps) {
   return <p className="text-xs">{param.name}</p>;
 }
 
