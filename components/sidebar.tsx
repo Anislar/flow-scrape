@@ -12,17 +12,17 @@ import {
 
 import Logo from "./logo";
 import { Button, buttonVariants } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 
 const routes = [
   {
     name: "Home",
-    href: "",
+    href: "/",
     icon: HomeIcon,
   },
   {
-    name: "workflows",
-    href: "Workflows",
+    name: "Workflows",
+    href: "workflows",
     icon: Layers2Icon,
   },
   {
@@ -40,9 +40,8 @@ function DesktopSidebar() {
   const pathname = usePathname();
   const activePathname =
     routes.find(
-      (route) => route.href.length > 0 && pathname.includes(route.href)
+      (route) => route.href.length > 1 && pathname.includes(route.href)
     ) || routes[0];
-
   return (
     <div
       className=" hidden md:block w-[280px]  h-screen overflow-hidden
@@ -61,7 +60,7 @@ function DesktopSidebar() {
                   ? "sidebarItemActive"
                   : "sidebarItem",
             })}
-            key={route.href}
+            key={route.name}
             href={route.href}>
             <route.icon size={20} />
             {route.name}
@@ -79,7 +78,7 @@ export const MobileSidebar = () => {
   const pathname = usePathname();
   const activePathname =
     routes.find(
-      (route) => route.href.length > 0 && pathname.includes(route.href)
+      (route) => route.href.length > 1 && pathname.includes(route.href)
     ) || routes[0];
   return (
     <div className="block border-separate  bg-background md:hidden">
@@ -91,9 +90,12 @@ export const MobileSidebar = () => {
             </Button>
           </SheetTrigger>
           <SheetContent
-            className="w-[400px] sm:w-[540px] space-y-4"
+            className="w-[400px] sm:w-[540px] space-y-5"
             side="left">
-            <Logo />
+            <SheetTitle>
+              <Logo />
+            </SheetTitle>
+
             <div className="flex flex-col gap-1">
               {routes.map((route) => (
                 <Link
